@@ -1,0 +1,30 @@
+.message {
+  background-color: #F7F7F7;
+  padding: 10px;
+  width: max-content;
+  max-width: 500px;
+  margin-bottom: 10px;
+}
+.message:last-child {
+  /* margin-bottom: 0; */
+}
+.info {
+  display: flex;
+  align-items: center;
+}
+.holder {
+  font-size: 13px;
+  color: #22B9EC;
+  cursor: pointer;
+}
+.time {
+  font-size: 10px;
+  margin-left: 10px;
+  /* color: #22B9EC; */
+}
+.text {
+  background-color: #FFFFFF;
+  padding: 5px;
+  margin-top: 5px;
+  font-size: 14px;
+}

@@ -1,0 +1,44 @@
+.friend_wrapper {
+  display: flex;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid #F7F7F7;
+  cursor: pointer;
+}
+.friend_wrapper:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.avatar {
+  position: relative;
+  margin-right: 5px;
+}
+.avatar img {
+  width: 40px;
+  border-radius: 50%;
+}
+.online_bullet {
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  background-color: greenyellow;
+  border-radius: 50%;
+  position: absolute;
+  right: -7px;
+  bottom: 4px;
+  z-index: 1222;
+}
+.offline_bullet {
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  background-color: #FF6347;
+  border-radius: 50%;
+  position: absolute;
+  right: -7px;
+  bottom: 4px;
+  z-index: 1222;
+}
+.name {
+  
+}
