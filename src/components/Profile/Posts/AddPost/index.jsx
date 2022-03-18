@@ -1,17 +1,20 @@
 import React from 'react'
+import { addPostActionCreator, updatePostTextActionCreator } from '../../../../redux/store'
 import style from './AddPost.module.css'
 
-const AddPost = ({ state, updatePostText, addPost }) => {
+const AddPost = ({ state, dispatch }) => {
 
   const input = React.createRef()
 
   const inputHandler = () => {
     let value = input.current.value
-    updatePostText(value)
+    // updatePostText(value)
+    dispatch(updatePostTextActionCreator(value))
   }
 
   const addPostHandler = () => {
-    addPost()
+    // addPost()
+    dispatch(addPostActionCreator())
   }
 
   return (

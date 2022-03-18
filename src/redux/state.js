@@ -1,3 +1,9 @@
+// DEPRECATED
+// DEPRECATED
+// DEPRECATED
+// DEPRECATED
+// DEPRECATED
+
 let rerenderTree = () => {}
 
 let state = {

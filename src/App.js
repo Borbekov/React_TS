@@ -5,7 +5,7 @@ import Header from './components/Header/Header';
 import Profile from './pages/Profile/Profile';
 import Sidebar from './components/Sidebar/Sidebar';
 
-function App({ state, addPost, updatePostText }) {
+function App({ state, dispatch }) {
   return (
     <Router>
       <div className="App">
@@ -19,8 +19,7 @@ function App({ state, addPost, updatePostText }) {
                 element={
                   <Profile
                     state={state.profilePage}
-                    addPost={addPost}
-                    updatePostText={updatePostText}
+                    dispatch={dispatch}
                   />
                 }
               />

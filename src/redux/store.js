@@ -1,4 +1,8 @@
+const ADD_POST = "ADD_POST"
+const UPDATE_POST_TEXT = "UPDATE_POST_TEXT"
+
 let store = {
+
   _state: {
     profilePage: {
       posts: [
@@ -46,28 +50,43 @@ let store = {
       ]
     }
   },
-  getState() {
-    return this._state
-  },
-  addPost() {
-    const post = {
-      id: 6,
-      text: this._state.profilePage.newPostText
-    }
-    this._state.profilePage.posts.push(post)
-    this._state.profilePage.newPostText = ''
-    this._subscriber(this._state)
-  },
-  updatePostText(newPostText) {
-    this._state.profilePage.newPostText = newPostText
-    this._subscriber(this._state)
-  },
   _subscriber() {
     console.log("There is no subscriber")
   },
+
+  getState() {
+    return this._state
+  },
   subscribe(observer) {
     this._subscriber = observer
+  },
+
+  dispatch(action) {
+    if (action.type === ADD_POST) {
+      const post = {
+        id: 6,
+        text: this._state.profilePage.newPostText
+      }
+      this._state.profilePage.posts.push(post)
+      this._state.profilePage.newPostText = ''
+      this._subscriber(this._state)
+    } else if (action.type === UPDATE_POST_TEXT) {
+      this._state.profilePage.newPostText = action.newPostText
+      this._subscriber(this._state)
+    }
   }
 }
+
+export const addPostActionCreator = () => (
+  {
+    type: ADD_POST
+  }
+)
+export const updatePostTextActionCreator = (newPostText) => (
+  {
+    type: UPDATE_POST_TEXT,
+    newPostText
+  }
+)
 
 export default store;

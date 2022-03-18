@@ -2,7 +2,7 @@ import styles from './Posts.module.css'
 import Post from "./Post/Post"
 import AddPost from './AddPost'
 
-const Posts = ({ state, addPost, updatePostText }) => {
+const Posts = ({ state, dispatch }) => {
 
   const post = state.posts.map(post => (
     <Post post={post} />
@@ -10,7 +10,7 @@ const Posts = ({ state, addPost, updatePostText }) => {
 
   return (
     <div>
-      <AddPost state={state} addPost={addPost} updatePostText={updatePostText} />
+      <AddPost state={state} dispatch={dispatch} />
       {post}
     </div>
   )
