@@ -26,7 +26,10 @@ function App({ state, dispatch }) {
               <Route
                 path='/messages'
                 element={
-                  <Chats state={state.messagesPage} />
+                  <Chats
+                    state={state.messagesPage}
+                    dispatch={dispatch}
+                  />
                 }
               />
             </Routes>

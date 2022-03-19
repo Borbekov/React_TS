@@ -1,5 +1,5 @@
-const ADD_POST = "ADD_POST"
-const UPDATE_POST_TEXT = "UPDATE_POST_TEXT"
+import chatReducer from "./reducers/chat-reducer"
+import postReducer from "./reducers/post-reducer"
 
 let store = {
 
@@ -47,7 +47,8 @@ let store = {
           time: "12:08",
           text: "Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?"
         }
-      ]
+      ],
+      newMessageText: ""
     }
   },
   _subscriber() {
@@ -62,31 +63,11 @@ let store = {
   },
 
   dispatch(action) {
-    if (action.type === ADD_POST) {
-      const post = {
-        id: 6,
-        text: this._state.profilePage.newPostText
-      }
-      this._state.profilePage.posts.push(post)
-      this._state.profilePage.newPostText = ''
-      this._subscriber(this._state)
-    } else if (action.type === UPDATE_POST_TEXT) {
-      this._state.profilePage.newPostText = action.newPostText
-      this._subscriber(this._state)
-    }
+    this._state.profilePage = postReducer(this._state.profilePage, action)
+    this._state.messagesPage = chatReducer(this._state.messagesPage, action)
+
+    this._subscriber(this._state)
   }
 }
-
-export const addPostActionCreator = () => (
-  {
-    type: ADD_POST
-  }
-)
-export const updatePostTextActionCreator = (newPostText) => (
-  {
-    type: UPDATE_POST_TEXT,
-    newPostText
-  }
-)
 
 export default store;

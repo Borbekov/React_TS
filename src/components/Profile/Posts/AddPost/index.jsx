@@ -1,5 +1,5 @@
 import React from 'react'
-import { addPostActionCreator, updatePostTextActionCreator } from '../../../../redux/store'
+import { addPostActionCreator, updatePostTextActionCreator } from '../../../../redux/reducers/post-reducer'
 import style from './AddPost.module.css'
 
 const AddPost = ({ state, dispatch }) => {
