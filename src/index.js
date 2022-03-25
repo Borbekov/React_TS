@@ -4,22 +4,21 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import store from './redux/store';
+import { combineReducers, createStore } from 'redux';
+import chatReducer from './redux/reducers/chat-reducer';
+import postReducer from './redux/reducers/post-reducer';
 
-const rerenderTree = (state) => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <App
-        state={state}
-        dispatch={store.dispatch.bind(store)}
-      />
-    </React.StrictMode>,
-    document.getElementById('root')
-  );
-}
+let reducers = combineReducers({
+  chatReducer,
+  postReducer
+})
+const store = createStore(reducers)
 
-rerenderTree(store.getState())
-
-store.subscribe(rerenderTree)
+ReactDOM.render(
+  <React.StrictMode>
+    <App store={store} />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
 reportWebVitals();

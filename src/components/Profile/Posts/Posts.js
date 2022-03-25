@@ -4,13 +4,13 @@ import AddPost from './AddPost'
 
 const Posts = ({ state, dispatch }) => {
 
-  const post = state.posts.map(post => (
+  const post = state.postReducer.posts.map(post => (
     <Post post={post} />
   ))
 
   return (
     <div>
-      <AddPost state={state} dispatch={dispatch} />
+      <AddPost state={state.postReducer.newPostText} dispatch={dispatch} />
       {post}
     </div>
   )

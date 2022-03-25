@@ -1,7 +1,36 @@
 const UPDATE_MESSAGE_TEXT = "UPDATE_MESSAGE_TEXT"
 const ADD_MESSAGE = "ADD_MESSAGE"
 
-const chatReducer = (state, action) => {
+const initState = {
+  messages: [
+    {
+      id: 1,
+      income: true,
+      time: "12:08",
+      text: "Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?"
+    },
+    {
+      id: 2,
+      income: false,
+      time: "12:08",
+      text: "Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?"
+    },
+    {
+      id: 3,
+      income: false,
+      time: "12:08",
+      text: "Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?"
+    },
+    {
+      id: 4,
+      income: true,
+      time: "12:08",
+      text: "Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?"
+    }
+  ]
+}
+
+const chatReducer = (state = initState, action) => {
   switch (action.type) {
     case UPDATE_MESSAGE_TEXT:
       state.newMessageText = action.newMessageText

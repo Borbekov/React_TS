@@ -5,7 +5,7 @@ import Header from './components/Header/Header';
 import Profile from './pages/Profile/Profile';
 import Sidebar from './components/Sidebar/Sidebar';
 
-function App({ state, dispatch }) {
+function App({ store }) {
   return (
     <Router>
       <div className="App">
@@ -17,19 +17,13 @@ function App({ state, dispatch }) {
               <Route
                 path='/profile'
                 element={
-                  <Profile
-                    state={state.profilePage}
-                    dispatch={dispatch}
-                  />
+                  <Profile store={store} />
                 }
               />
               <Route
                 path='/messages'
                 element={
-                  <Chats
-                    state={state.messagesPage}
-                    dispatch={dispatch}
-                  />
+                  <Chats store={store} />
                 }
               />
             </Routes>

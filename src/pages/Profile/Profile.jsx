@@ -1,12 +1,12 @@
 import Posts from '../../components/Profile/Posts/Posts';
 import styles from './Profile.module.css'
 
-const Profile = ({ state, dispatch }) => {
+const Profile = ({ store }) => {
   return (
     <div>
       <Posts
-        state={state}
-        dispatch={dispatch}
+        state={store.getState()}
+        dispatch={store.dispatch}
       />
     </div>
   )

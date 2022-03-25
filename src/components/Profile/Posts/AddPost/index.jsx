@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { addPostActionCreator, updatePostTextActionCreator } from '../../../../redux/reducers/post-reducer'
 import style from './AddPost.module.css'
 
@@ -30,4 +31,16 @@ const AddPost = ({ state, dispatch }) => {
   )
 }
 
-export default AddPost;
+const mapStateToProps = (state) => {
+  return {
+    newPostText: state.newPostText
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addPostHandler: addPostActionCreator,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddPost);
