@@ -40,18 +40,24 @@ const initState = {
 
 const chatReducer = (state = initState, action) => {
   switch (action.type) {
-    case UPDATE_MESSAGE_TEXT:
-      state.newMessageText = action.newMessageText
-      return state
-    case ADD_MESSAGE:
+    case UPDATE_MESSAGE_TEXT: {
+      let newState = {...state}
+      newState.newMessageText = action.newMessageText
+      return newState
+    }
+    case ADD_MESSAGE: {
+      let newState = {...state}
+      newState.messages = [...state.messages]
       const message = {
         id: 5,
         income: false,
         time: "12:08",
-        text: state.newMessageText
+        text: newState.newMessageText
       }
-      state.messages.push(message)
-      state.newMessageText = ''
+      newState.messages.push(message)
+      newState.newMessageText = ''
+      return newState
+    }
     default:
       return state
   }

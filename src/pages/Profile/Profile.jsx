@@ -3,13 +3,9 @@ import Posts from '../../components/Profile/Posts/Posts';
 import { addPostActionCreator, updatePostTextActionCreator } from '../../redux/reducers/profile-reducer'
 
 const Profile = (props) => {
-  console.log("OPPP ", props);
   return (
     <div>
-      {/* <Posts
-        state={store.getState()}
-        dispatch={store.dispatch}
-      /> */}
+      <Posts props={props} />
     </div>
   )
 }
@@ -22,7 +18,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addPosition: () => {
+    inputHandler: (value) => {
+      dispatch(updatePostTextActionCreator(value))
+    },
+    addPost: () => {
       dispatch(addPostActionCreator())
     }
   }

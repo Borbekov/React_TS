@@ -2,21 +2,21 @@ import { updateMessageTextActionCreator, addMessageActionCreator } from "../../.
 import style from "./Chat.module.css"
 import Message from "./Message/Message";
 
-const Chat = ({ state, dispatch }) => {
+const Chat = (props) => {
 
-  const message = state.messages.map(m => (
-    <div className={!m.income && style.from_me}>
+  const message = props.messages.map(m => (
+    <div className={!m.income && style.from_me} key={m.id}>
       <Message message={m} />
     </div>
   ))
   
   const msgHandleChange = (e) => {
     let text = e.target.value
-    dispatch(updateMessageTextActionCreator(text))
+    props.updateMessageText(text)
   }
 
   const handleClick = () => (
-    dispatch(addMessageActionCreator())
+    props.addMessage()
   )
 
   return (
@@ -24,7 +24,7 @@ const Chat = ({ state, dispatch }) => {
       {message}
       <input
         type="text"
-        value={state.newMessageText}
+        value={props.newMessageText}
         onChange={msgHandleChange}
       />
       <button onClick={handleClick}>Send</button>

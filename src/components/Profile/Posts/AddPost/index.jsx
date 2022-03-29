@@ -1,46 +1,30 @@
-// import React from 'react'
-// import { connect } from 'react-redux'
-// import { addPostActionCreator, updatePostTextActionCreator } from '../../../../redux/reducers/post-reducer'
-// import style from './AddPost.module.css'
+import React from 'react'
+import style from './AddPost.module.css'
 
-// const AddPost = ({ state, dispatch }) => {
+const AddPost = ({ newPostText, inputHandler, addPost }) => {
 
-//   const input = React.createRef()
+  const input = React.createRef()
 
-//   const inputHandler = () => {
-//     let value = input.current.value
-//     // updatePostText(value)
-//     dispatch(updatePostTextActionCreator(value))
-//   }
+  const inputHandler1 = () => {
+    let value = input.current.value
+    inputHandler(value)
+  }
 
-//   const addPostHandler = () => {
-//     // addPost()
-//     dispatch(addPostActionCreator())
-//   }
+  const addPostHandler = () => {
+    addPost()
+  }
 
-//   return (
-//     <div className={style.wrapper}>
-//       <input
-//         ref={input}
-//         type="text"
-//         value={state.newPostText}
-//         onChange={inputHandler} 
-//       />
-//       <button onClick={addPostHandler}>Add Post</button>
-//     </div>
-//   )
-// }
+  return (
+    <div className={style.wrapper}>
+      <input
+        ref={input}
+        type="text"
+        value={newPostText}
+        onChange={inputHandler1} 
+      />
+      <button onClick={addPostHandler}>Add Post</button>
+    </div>
+  )
+}
 
-// const mapStateToProps = (state) => {
-//   return {
-//     newPostText: state.newPostText
-//   }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     addPostHandler: addPostActionCreator,
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(AddPost);
+export default AddPost;

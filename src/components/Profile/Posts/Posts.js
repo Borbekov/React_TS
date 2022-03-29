@@ -2,15 +2,14 @@ import styles from './Posts.module.css'
 import Post from "./Post/Post"
 import AddPost from './AddPost'
 
-const Posts = ({ state, dispatch }) => {
-
-  const post = state.postReducer.posts.map(post => (
-    <Post post={post} />
+const Posts = ({ props }) => {
+  const post = props.profilePage.posts.map(post => (
+    <Post post={post} key={post.id} />
   ))
 
   return (
     <div>
-      <AddPost state={state.postReducer.newPostText} dispatch={dispatch} />
+      <AddPost newPostText={props.profilePage.newPostText} inputHandler={props.inputHandler} addPost={props.addPost} />
       {post}
     </div>
   )
