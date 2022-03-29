@@ -2,6 +2,13 @@ const UPDATE_MESSAGE_TEXT = "UPDATE_MESSAGE_TEXT"
 const ADD_MESSAGE = "ADD_MESSAGE"
 
 const initState = {
+  friends: [
+    {id: 1, online: true, name: "Aliken Saulet"},
+    {id: 2, online: true, name: "Kengesbek Temirlan"},
+    {id: 3, online: true, name: "Zhaksybekova Moldir"},
+    {id: 4, online: false, name: "Kydyrsha Sanat"},
+    {id: 5, online: false, name: "Alexandr Ligay"}
+  ],
   messages: [
     {
       id: 1,
@@ -27,7 +34,8 @@ const initState = {
       time: "12:08",
       text: "Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?"
     }
-  ]
+  ],
+  newMessageText: ""
 }
 
 const chatReducer = (state = initState, action) => {

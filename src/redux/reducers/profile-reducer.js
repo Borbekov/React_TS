@@ -12,7 +12,7 @@ const initState = {
   newPostText: ""
 }
 
-const postReducer = (state = initState, action) => {
+const profileReducer = (state = initState, action) => {
   switch (action.type) {
     case UPDATE_POST_TEXT:
       state.newPostText = action.newPostText
@@ -42,4 +42,4 @@ export const addPostActionCreator = () => (
   }
 )
 
-export default postReducer;
+export default profileReducer;

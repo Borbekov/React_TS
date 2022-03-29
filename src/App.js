@@ -17,7 +17,7 @@ function App({ store }) {
               <Route
                 path='/profile'
                 element={
-                  <Profile store={store} />
+                  <Profile />
                 }
               />
               <Route
