@@ -4,6 +4,7 @@ import Chats from './pages/Chats/Chats';
 import Header from './components/Header/Header';
 import Profile from './pages/Profile/Profile';
 import Sidebar from './components/Sidebar/Sidebar';
+import UsersContainer from './pages/Users/UsersContainer';
 
 function App({ store }) {
   return (
@@ -24,6 +25,12 @@ function App({ store }) {
                 path='/messages'
                 element={
                   <Chats store={store} />
+                }
+              />
+              <Route
+                path='/users'
+                element={
+                  <UsersContainer />
                 }
               />
             </Routes>

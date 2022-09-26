@@ -21,7 +21,7 @@ const Chat = (props) => {
 
   return (
     <div className={style.chat}>
-      {message}
+      { message }
       <input
         type="text"
         value={props.newMessageText}

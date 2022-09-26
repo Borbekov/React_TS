@@ -1,0 +1,23 @@
+.userWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.infoBlock {
+  display: flex;
+  gap: 10px;
+}
+.avatar img {
+  width: 50px;
+}
+.userName {
+  margin: 5px 0;
+}
+.actionBlock button {
+  width: 104px;
+}
+.followedBtn {
+  background-color: inherit;
+  color: #22B9EC;
+}
