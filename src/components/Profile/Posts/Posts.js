@@ -9,7 +9,7 @@ const Posts = ({ props }) => {
 
   return (
     <div>
-      <AddPost newPostText={props.profilePage.newPostText} inputHandler={props.inputHandler} addPost={props.addPost} />
+      <AddPost newPostText={props.profilePage.newPostText} inputHandler={props.updatePostText} addPost={props.addPost} />
       {post}
     </div>
   )

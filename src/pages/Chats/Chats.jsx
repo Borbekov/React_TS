@@ -2,7 +2,7 @@ import Chat from '../../components/Chats/Chat/Chat';
 import style from './Chats.module.css'
 import FriendsList from '../../components/Chats/FriendsList/FriendsList';
 import { connect } from 'react-redux';
-import { updateMessageTextActionCreator, addMessageActionCreator } from '../../redux/reducers/chat-reducer';
+import { updateMessageText, addMessage } from '../../redux/reducers/chat-reducer';
 
 const Chats = (props) => {
   return (
@@ -26,15 +26,15 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateMessageText: (text) => {
-      dispatch(updateMessageTextActionCreator(text))
-    },
-    addMessage: () => {
-      dispatch(addMessageActionCreator())
-    }
-  }
-}
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     updateMessageText: (text) => {
+//       dispatch(updateMessageTextActionCreator(text))
+//     },
+//     addMessage: () => {
+//       dispatch(addMessageActionCreator())
+//     }
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chats);
+export default connect(mapStateToProps, { updateMessageText, addMessage })(Chats);

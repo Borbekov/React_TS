@@ -64,13 +64,13 @@ const chatReducer = (state = initState, action) => {
   }
 }
 
-export const updateMessageTextActionCreator = (newMessageText) => (
+export const updateMessageText = (newMessageText) => (
   {
     type: UPDATE_MESSAGE_TEXT,
     newMessageText
   }
 )
-export const addMessageActionCreator = () => (
+export const addMessage = () => (
   {
     type: ADD_MESSAGE
   }

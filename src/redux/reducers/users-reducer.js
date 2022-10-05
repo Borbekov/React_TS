@@ -65,13 +65,13 @@ const usersReducer = (state = initState, action) => {
   }
 }
 
-export const setUsersAC = (users) => (
+export const setUsers = (users) => (
   {
     type: SET_USERS,
     users
   }
 )
-export const toggleFollowUnfollowAC = (userId) => (
+export const toggleFollowUnfollow = (userId) => (
   {
     type: TOGGLE_FOLLOW_UNFOLLOW,
     userId
