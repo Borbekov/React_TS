@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import User from "../../components/Users/User";
-import { setUsers, toggleFollowUnfollow } from "../../redux/reducers/users-reducer";
+import Paginate from "../../components/Paginate";
+import { setUsers, toggleFollowUnfollow, setCurrentPage, getUsers } from "../../redux/reducers/users-reducer";
 
 const Users = (props) => {
+  useEffect(() => {
+    props.getUsers(props.currentPage)
+  }, [props.currentPage])
+
   return (
     <div>
       {
@@ -14,13 +20,21 @@ const Users = (props) => {
           />
         ))
       }
+      
+      <Paginate
+        pageRangeDisplayed={3}
+        pageCount={props.totalPages}
+        setCurrentPage={props.setCurrentPage}
+      />
     </div>
   )
 }
 
 const mapStateToProps = state => (
   {
-    users: state.usersPage.users
+    users: state.usersPage.users,
+    currentPage: state.usersPage.currentPage,
+    totalPages: state.usersPage.totalPages
   }
 )
 
@@ -35,4 +49,4 @@ const mapStateToProps = state => (
 //   }
 // )
 
-export default connect(mapStateToProps, { setUsers, toggleFollowUnfollow })(Users)
+export default connect(mapStateToProps, { setUsers, toggleFollowUnfollow, setCurrentPage, getUsers })(Users)

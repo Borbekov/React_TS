@@ -1,43 +1,13 @@
+import { usersAPI } from "../../api"
+
 const SET_USERS = 'SET_USERS'
 const TOGGLE_FOLLOW_UNFOLLOW = 'TOGGLE_FOLLOW_UNFOLLOW'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
 const initState = {
-  users: [
-    {
-      id: 1,
-      avatar: 'https://freepikpsd.com/file/2019/10/avatar-icon-png-5-Images-PNG-Transparent.png',
-      name: 'Bekzhan Borbekov',
-      location: {
-        city: {
-          id: 1,
-          name: 'Almaty'
-        },
-        country: {
-          id: 1,
-          name: 'KZ'
-        }
-      },
-      followed: false,
-      online: true
-    },
-    {
-      id: 2,
-      avatar: 'https://freepikpsd.com/file/2019/10/avatar-icon-png-5-Images-PNG-Transparent.png',
-      name: 'Bekzhan Borbekov',
-      location: {
-        city: {
-          id: 1,
-          name: 'Almaty'
-        },
-        country: {
-          id: 1,
-          name: 'KZ'
-        }
-      },
-      followed: true,
-      online: true
-    }
-  ]
+  users: [],
+  currentPage: 1,
+  totalPages: null
 }
 
 const usersReducer = (state = initState, action) => {
@@ -45,21 +15,27 @@ const usersReducer = (state = initState, action) => {
     case SET_USERS:
       return {
         ...state,
-        users: [...state.users, ...action.users]
+        users: action.users.items,
+        totalPages: Math.ceil(action.users.totalCount / 10)
       }
     case TOGGLE_FOLLOW_UNFOLLOW:
-        return {
-          ...state,
-          users: state.users.map(u => {
-            if (u.id === action.userId) {
-              return {
-                ...u,
-                followed: !u.followed
-              }
+      return {
+        ...state,
+        users: state.users.map(u => {
+          if (u.id === action.userId) {
+            return {
+              ...u,
+              followed: !u.followed
             }
-            return u
-          })
-        }
+          }
+          return u
+        })
+      }
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.page
+      }
     default:
       return state
   }
@@ -77,5 +53,16 @@ export const toggleFollowUnfollow = (userId) => (
     userId
   }
 )
+export const setCurrentPage = (page) => (
+  {
+    type: SET_CURRENT_PAGE,
+    page
+  }
+)
+
+export const getUsers = (page) => async (dispatch) => {
+  const usersResp = await usersAPI.getUsers(page)
+  dispatch(setUsers(usersResp.data))
+}
 
 export default usersReducer;

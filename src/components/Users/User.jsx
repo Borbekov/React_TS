@@ -15,13 +15,13 @@ const User = ({ user, toggleFollowUnfollow }) => {
     <div className={s.userWrapper}>
       <div className={s.infoBlock}>
         <div className={s.avatar}>
-          <img src={user.avatar} />
+          <img src={user.photos.large} />
         </div>
         <div className={s.userData}>
           <p className={s.userName}>{ user.name }</p>
-          <p className={s.userLocation}>
-            { user.location.city.name }, { user.location.country.name }
-          </p>
+          {/* <p className={s.userLocation}>
+            user.location.city.name, user.location.country.name
+          </p> */}
         </div>
       </div>
       <div className={s.actionBlock}>
