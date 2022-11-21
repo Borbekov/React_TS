@@ -1,6 +1,11 @@
 const UPDATE_POST_TEXT = "UPDATE_POST_TEXT"
 const ADD_POST = "ADD_POST"
 
+export type PostType = {
+  id: number,
+  text: string
+}
+
 const initState = {
   posts: [
     {id: 1, text: "My name is..."},
@@ -8,11 +13,13 @@ const initState = {
     {id: 3, text: "From Kazakhstan"},
     {id: 4, text: "Uade"},
     {id: 5, text: "Kim bar munda?"},
-  ],
+  ] as Array<PostType>,
   newPostText: ""
 }
 
-const profileReducer = (state = initState, action) => {
+export type InitStateType = typeof initState
+
+const profileReducer = (state = initState, action: any): InitStateType => {
   switch (action.type) {
     case UPDATE_POST_TEXT: {
       return {
@@ -36,13 +43,21 @@ const profileReducer = (state = initState, action) => {
   }
 }
 
-export const updatePostText = (newPostText) => (
+export type UpdatePostTextType = {
+  type: typeof UPDATE_POST_TEXT,
+  newPostText: string
+}
+export type AddPostTextType = {
+  type: typeof ADD_POST
+}
+
+export const updatePostText = (newPostText: string): UpdatePostTextType => (
   {
     type: UPDATE_POST_TEXT,
     newPostText
   }
 )
-export const addPost = () => (
+export const addPost = (): AddPostTextType => (
   {
     type: ADD_POST
   }

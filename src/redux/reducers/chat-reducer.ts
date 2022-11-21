@@ -1,6 +1,19 @@
 const UPDATE_MESSAGE_TEXT = "UPDATE_MESSAGE_TEXT"
 const ADD_MESSAGE = "ADD_MESSAGE"
 
+export type FriendType = {
+  id: number,
+  online: boolean,
+  name: string
+}
+
+export type MessageType = {
+  id: number,
+  income: boolean,
+  time: string,
+  text: string
+}
+
 const initState = {
   friends: [
     {id: 1, online: true, name: "Aliken Saulet"},
@@ -8,7 +21,7 @@ const initState = {
     {id: 3, online: true, name: "Zhaksybekova Moldir"},
     {id: 4, online: false, name: "Kydyrsha Sanat"},
     {id: 5, online: false, name: "Alexandr Ligay"}
-  ],
+  ] as Array<FriendType>,
   messages: [
     {
       id: 1,
@@ -34,11 +47,13 @@ const initState = {
       time: "12:08",
       text: "Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?Hello, my friend! How are you?"
     }
-  ],
+  ] as Array<MessageType>,
   newMessageText: ""
 }
 
-const chatReducer = (state = initState, action) => {
+export type InitStateType = typeof initState;
+
+const chatReducer = (state = initState, action: any): InitStateType => {
   switch (action.type) {
     case UPDATE_MESSAGE_TEXT: {
       return {
@@ -64,13 +79,21 @@ const chatReducer = (state = initState, action) => {
   }
 }
 
-export const updateMessageText = (newMessageText) => (
+export type UpdateMessageTextType = {
+  type: typeof UPDATE_MESSAGE_TEXT,
+  newMessageText: string
+}
+export type AddMessageType = {
+  type: typeof ADD_MESSAGE,
+}
+
+export const updateMessageText = (newMessageText: string): UpdateMessageTextType => (
   {
     type: UPDATE_MESSAGE_TEXT,
     newMessageText
   }
 )
-export const addMessage = () => (
+export const addMessage = (): AddMessageType => (
   {
     type: ADD_MESSAGE
   }
