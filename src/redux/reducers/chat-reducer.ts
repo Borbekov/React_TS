@@ -1,18 +1,7 @@
+import { FriendType, MessageType } from "../../types/type";
+
 const UPDATE_MESSAGE_TEXT = "UPDATE_MESSAGE_TEXT"
 const ADD_MESSAGE = "ADD_MESSAGE"
-
-export type FriendType = {
-  id: number,
-  online: boolean,
-  name: string
-}
-
-export type MessageType = {
-  id: number,
-  income: boolean,
-  time: string,
-  text: string
-}
 
 const initState = {
   friends: [

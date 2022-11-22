@@ -1,6 +1,14 @@
 import style from './Message.module.css'
 
-const Message = ({ message }) => {
+type PropsType = {
+  message: {
+    id: number,
+    time: string,
+    text: string
+  }
+}
+
+const Message: React.FC<PropsType> = ({ message }) => {
   return (
     <div className={style.message} key={message.id}>
       <div className={style.info}>

@@ -3,8 +3,23 @@ import style from './Chats.module.css'
 import FriendsList from '../../components/Chats/FriendsList/FriendsList';
 import { connect } from 'react-redux';
 import { updateMessageText, addMessage } from '../../redux/reducers/chat-reducer';
+import { StoreStateType } from '../../redux/redux-store';
+import { FriendType, MessageType } from '../../types/type';
 
-const Chats = (props) => {
+type MapStateToPropsType = {
+  friends: Array<FriendType>,
+  messages: Array<MessageType>,
+  newMessageText: string
+}
+
+type MapDispatchToPropsType = {
+  updateMessageText: (text: string) => void
+  addMessage: () => void
+}
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
+
+const Chats: React.FC<PropsType> = (props) => {
   return (
     <div className={style.chats_wrapper}>
       <FriendsList friends={props.friends} />
@@ -18,7 +33,7 @@ const Chats = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: StoreStateType) => {
   return {
     friends: state.messagePage.friends,
     messages: state.messagePage.messages,
@@ -37,4 +52,4 @@ const mapStateToProps = (state) => {
 //   }
 // }
 
-export default connect(mapStateToProps, { updateMessageText, addMessage })(Chats);
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, StoreStateType>(mapStateToProps, { updateMessageText, addMessage })(Chats);

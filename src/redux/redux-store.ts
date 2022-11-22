@@ -4,12 +4,15 @@ import chatReducer from "./reducers/chat-reducer";
 import profileReducer from "./reducers/profile-reducer";
 import usersReducer from "./reducers/users-reducer";
 
-let reducers = combineReducers({
+let rootReducers = combineReducers({
   profilePage: profileReducer,
   messagePage: chatReducer,
   usersPage: usersReducer
 })
 
-let store = createStore(reducers, applyMiddleware(thunk))
+type RootReducersType = typeof rootReducers
+export type StoreStateType = ReturnType<RootReducersType>
+
+let store = createStore(rootReducers, applyMiddleware(thunk))
 
 export default store;

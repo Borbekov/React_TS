@@ -24,7 +24,7 @@ function App({ store }) {
               <Route
                 path='/messages'
                 element={
-                  <Chats store={store} />
+                  <Chats />
                 }
               />
               <Route

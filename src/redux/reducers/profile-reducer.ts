@@ -1,10 +1,7 @@
+import { PostType } from "../../types/type"
+
 const UPDATE_POST_TEXT = "UPDATE_POST_TEXT"
 const ADD_POST = "ADD_POST"
-
-export type PostType = {
-  id: number,
-  text: string
-}
 
 const initState = {
   posts: [

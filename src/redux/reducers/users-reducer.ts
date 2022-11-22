@@ -1,17 +1,9 @@
 import { usersAPI } from "../../api"
+import { UserType } from "../../types/type"
 
 const SET_USERS = 'SET_USERS'
 const TOGGLE_FOLLOW_UNFOLLOW = 'TOGGLE_FOLLOW_UNFOLLOW'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-
-export type UserType = {
-  followed: boolean
-  id: number
-  name: string
-  photos: {small: null | string, large: null | string}
-  status: null | string
-  uniqueUrlName: null | string
-}
 
 const initState = {
   users: [] as Array<UserType>,

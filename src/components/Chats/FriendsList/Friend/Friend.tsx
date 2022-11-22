@@ -1,6 +1,11 @@
+import { FriendType } from '../../../../types/type'
 import style from './Friend.module.css'
 
-const Friend = ({ friend }) => {
+type PropsType = {
+  friend: FriendType
+}
+
+const Friend: React.FC<PropsType> = ({ friend }) => {
   return (
     <div className={style.friend_wrapper} key={friend.id}>
       <div className={style.avatar}>
