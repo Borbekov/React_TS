@@ -10,8 +10,7 @@ let rootReducers = combineReducers({
   usersPage: usersReducer
 })
 
-type RootReducersType = typeof rootReducers
-export type StoreStateType = ReturnType<RootReducersType>
+export type StoreStateType = ReturnType<typeof rootReducers>
 
 let store = createStore(rootReducers, applyMiddleware(thunk))
 

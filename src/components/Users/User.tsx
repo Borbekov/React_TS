@@ -1,6 +1,12 @@
+import { UserType } from '../../types/type'
 import s from './User.module.css'
 
-const User = ({ user, toggleFollowUnfollow }) => {
+type PropsType = {
+  user: UserType,
+  toggleFollowUnfollow: (userId: number) => void
+}
+
+const User: React.FC<PropsType> = ({ user, toggleFollowUnfollow }) => {
   const onToggleFollowUnfollowClick = () => {
     toggleFollowUnfollow(user.id)
   }
@@ -8,7 +14,7 @@ const User = ({ user, toggleFollowUnfollow }) => {
   const actionBtn = user.followed ? (
       <button onClick={onToggleFollowUnfollowClick}>Unfollow</button>
     ) : (
-      <button onClick={onToggleFollowUnfollowClick} class={s.followedBtn}>Follow</button>
+      <button onClick={onToggleFollowUnfollowClick} className={s.followedBtn}>Follow</button>
     )
 
   return (

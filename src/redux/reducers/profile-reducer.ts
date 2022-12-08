@@ -16,7 +16,7 @@ const initState = {
 
 export type InitStateType = typeof initState
 
-const profileReducer = (state = initState, action: any): InitStateType => {
+const profileReducer = (state = initState, action: any): InitStateType => {  
   switch (action.type) {
     case UPDATE_POST_TEXT: {
       return {

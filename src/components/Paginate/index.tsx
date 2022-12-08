@@ -1,9 +1,20 @@
 import ReactPaginate from 'react-paginate';
 import s from './paginate.module.css'
 
-const Paginate = (props) => {
+type PropsType = {
+  pageRangeDisplayed: number,
+  pageCount: number | null,
+  setCurrentPage: (page: number) => void
+}
 
-  const handlePageClick = (page) => {
+type PageType = {
+  selected: number
+}
+
+const Paginate: React.FC<PropsType> = (props) => {
+// const Paginate = (props) => {
+
+  const handlePageClick = (page: PageType) => {
     props.setCurrentPage(page.selected + 1)
   }
 
@@ -12,7 +23,7 @@ const Paginate = (props) => {
       className={s.paginate}
       onPageChange={handlePageClick}
       pageRangeDisplayed={props.pageRangeDisplayed}
-      pageCount={props.pageCount}
+      pageCount={props.pageCount as number}
       nextLabel=">"
       previousLabel="<"
     />

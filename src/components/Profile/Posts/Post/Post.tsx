@@ -1,6 +1,11 @@
+import { PostType } from '../../../../types/type';
 import styles from './Post.module.css'
 
-const Post = ({ post }) => {
+type PropsType = {
+  post: PostType
+}
+
+const Post: React.FC<PropsType> = ({ post }) => {
   return (
     <div className={styles.post_wrapper} key={post.id}>
       <div className={styles.post}>

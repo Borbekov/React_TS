@@ -2,9 +2,25 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import User from "../../components/Users/User";
 import Paginate from "../../components/Paginate";
-import { setUsers, toggleFollowUnfollow, setCurrentPage, getUsers } from "../../redux/reducers/users-reducer";
+import { toggleFollowUnfollow, setCurrentPage, getUsers } from "../../redux/reducers/users-reducer";
+import { UserType } from "../../types/type";
+import { StoreStateType } from "../../redux/redux-store";
 
-const Users = (props) => {
+type MapStateToPropsType = {
+  users: Array<UserType>,
+  currentPage: number,
+  totalPages: number | null
+}
+
+type MapDispatchToPropsType = {
+  toggleFollowUnfollow: (userId: number) => void,
+  setCurrentPage: (page: number) => void
+  getUsers: (page: number) => void
+}
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
+
+const Users: React.FC<PropsType> = (props) => {
   useEffect(() => {
     props.getUsers(props.currentPage)
   }, [props.currentPage])
@@ -30,7 +46,7 @@ const Users = (props) => {
   )
 }
 
-const mapStateToProps = state => (
+const mapStateToProps = (state: StoreStateType) => (
   {
     users: state.usersPage.users,
     currentPage: state.usersPage.currentPage,
@@ -49,4 +65,4 @@ const mapStateToProps = state => (
 //   }
 // )
 
-export default connect(mapStateToProps, { setUsers, toggleFollowUnfollow, setCurrentPage, getUsers })(Users)
+export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, StoreStateType>(mapStateToProps, { toggleFollowUnfollow, setCurrentPage, getUsers })(Users)

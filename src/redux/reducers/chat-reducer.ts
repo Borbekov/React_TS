@@ -76,6 +76,7 @@ export type AddMessageType = {
   type: typeof ADD_MESSAGE,
 }
 
+
 export const updateMessageText = (newMessageText: string): UpdateMessageTextType => (
   {
     type: UPDATE_MESSAGE_TEXT,
@@ -84,7 +85,7 @@ export const updateMessageText = (newMessageText: string): UpdateMessageTextType
 )
 export const addMessage = (): AddMessageType => (
   {
-    type: ADD_MESSAGE
+    type: ADD_MESSAGE,
   }
 )
 
