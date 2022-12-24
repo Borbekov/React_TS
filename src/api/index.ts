@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
+import { UserType } from '../types/type'
 
 const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -8,8 +9,21 @@ const instance = axios.create({
   // withCredentials: true
 })
 
+export enum CodesEnum {
+  Success = 0,
+  Error = 1
+}
+
+type GetUsersType = {
+  error: null | string,
+  items: Array<UserType>,
+  totalCount: number
+}
+
 export const usersAPI = {
   getUsers(page: number) {
-    return instance.get(`users?count=${10}&page=${page}`)
+    return instance.get<GetUsersType>(`users?count=${10}&page=${page}`)
   }
 }
+
+usersAPI.getUsers(1).then((response: AxiosResponse<any>) => response.data)

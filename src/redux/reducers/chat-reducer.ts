@@ -1,7 +1,5 @@
 import { FriendType, MessageType } from "../../types/type";
-
-const UPDATE_MESSAGE_TEXT = "UPDATE_MESSAGE_TEXT"
-const ADD_MESSAGE = "ADD_MESSAGE"
+import { InferActionsType } from "../redux-store";
 
 const initState = {
   friends: [
@@ -42,15 +40,16 @@ const initState = {
 
 export type InitStateType = typeof initState;
 
-const chatReducer = (state = initState, action: any): InitStateType => {
+export type ActionType = InferActionsType<typeof actionCreators>
+
+const chatReducer = (state = initState, action: ActionType): InitStateType => {
   switch (action.type) {
-    case UPDATE_MESSAGE_TEXT: {
+    case 'UPDATE_MESSAGE_TEXT':
       return {
         ...state,
         newMessageText: action.newMessageText
       }
-    }
-    case ADD_MESSAGE: {
+    case 'ADD_MESSAGE':
       const message = {
         id: 5,
         income: false,
@@ -62,31 +61,23 @@ const chatReducer = (state = initState, action: any): InitStateType => {
         messages: [...state.messages, message],
         newMessageText: ''
       }
-    }
     default:
       return state
   }
 }
 
-export type UpdateMessageTextType = {
-  type: typeof UPDATE_MESSAGE_TEXT,
-  newMessageText: string
+export const actionCreators = {
+  updateMessageText: (newMessageText: string) => (
+    {
+      type: 'UPDATE_MESSAGE_TEXT',
+      newMessageText
+    } as const
+  ),
+  addMessage: () => (
+    {
+      type: 'ADD_MESSAGE',
+    } as const
+  )
 }
-export type AddMessageType = {
-  type: typeof ADD_MESSAGE,
-}
-
-
-export const updateMessageText = (newMessageText: string): UpdateMessageTextType => (
-  {
-    type: UPDATE_MESSAGE_TEXT,
-    newMessageText
-  }
-)
-export const addMessage = (): AddMessageType => (
-  {
-    type: ADD_MESSAGE,
-  }
-)
 
 export default chatReducer;

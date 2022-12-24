@@ -12,8 +12,6 @@ type PageType = {
 }
 
 const Paginate: React.FC<PropsType> = (props) => {
-// const Paginate = (props) => {
-
   const handlePageClick = (page: PageType) => {
     props.setCurrentPage(page.selected + 1)
   }

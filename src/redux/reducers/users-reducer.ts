@@ -1,9 +1,8 @@
-import { usersAPI } from "../../api"
+import { InferActionsType, StoreStateType } from './../redux-store';
+import { CodesEnum, usersAPI } from "../../api"
 import { UserType } from "../../types/type"
-
-const SET_USERS = 'SET_USERS'
-const TOGGLE_FOLLOW_UNFOLLOW = 'TOGGLE_FOLLOW_UNFOLLOW'
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+import { Dispatch } from 'redux';
+import { ThunkAction } from 'redux-thunk';
 
 const initState = {
   users: [] as Array<UserType>,
@@ -13,15 +12,18 @@ const initState = {
 
 export type InitStatType = typeof initState
 
-const usersReducer = (state = initState, action: any): InitStatType => {
+// export type ActionType = SetUsersType | ToggleFollowUnfollowType | SetCurrentPageType
+export type ActionType = InferActionsType<typeof actionCreators>
+
+const usersReducer = (state = initState, action: ActionType): InitStatType => {
   switch (action.type) {
-    case SET_USERS:
+    case 'SET_USERS':
       return {
         ...state,
         users: action.users.items,
         totalPages: Math.ceil(action.users.totalCount / 10)
       }
-    case TOGGLE_FOLLOW_UNFOLLOW:
+    case 'TOGGLE_FOLLOW_UNFOLLOW':
       return {
         ...state,
         users: state.users.map(u => {
@@ -34,7 +36,7 @@ const usersReducer = (state = initState, action: any): InitStatType => {
           return u
         })
       }
-    case SET_CURRENT_PAGE:
+    case 'SET_CURRENT_PAGE':
       return {
         ...state,
         currentPage: action.page
@@ -44,41 +46,40 @@ const usersReducer = (state = initState, action: any): InitStatType => {
   }
 }
 
-export type SetUsersType = {
-  type: typeof SET_USERS,
-  users: Array<UserType>
-}
-export type ToggleFollowUnfollowType = {
-  type: typeof TOGGLE_FOLLOW_UNFOLLOW,
-  userId: number
-}
-export type SetCurrentPageType = {
-  type: typeof SET_CURRENT_PAGE,
-  page: number
+export type UserRespType = {
+  items: Array<UserType>,
+  totalCount: number
 }
 
-export const setUsers = (users: Array<UserType>): SetUsersType => (
-  {
-    type: SET_USERS,
-    users
-  }
-)
-export const toggleFollowUnfollow = (userId: number): ToggleFollowUnfollowType => (
-  {
-    type: TOGGLE_FOLLOW_UNFOLLOW,
-    userId
-  }
-)
-export const setCurrentPage = (page: number): SetCurrentPageType => (
-  {
-    type: SET_CURRENT_PAGE,
-    page
-  }
-)
+export const actionCreators = {
+  setUsers: (users: UserRespType) => (
+    {
+      type: 'SET_USERS',
+      users
+    } as const
+  ),
+  toggleFollowUnfollow: (userId: number) => (
+    {
+      type: 'TOGGLE_FOLLOW_UNFOLLOW',
+      userId
+    } as const
+  ),
+  setCurrentPage: (page: number) => (
+    {
+      type: 'SET_CURRENT_PAGE',
+      page
+    } as const
+  )
+}
 
-export const getUsers = (page: number) => async (dispatch: any) => {
+
+type GetStateType = () => StoreStateType
+type DispatchType = Dispatch<ActionType>
+
+// export const getUsers = (page: number) => async (dispatch: DispatchType, getState: GetStateType) => {
+export const fetchUsers = (page: number): ThunkAction<Promise<void>, StoreStateType, unknown, ActionType> => async (dispatch) => {
   const usersResp = await usersAPI.getUsers(page)
-  dispatch(setUsers(usersResp.data))
+  dispatch(actionCreators.setUsers(usersResp.data))
 }
 
 export default usersReducer;

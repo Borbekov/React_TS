@@ -1,55 +1,26 @@
 import Chat from '../../components/Chats/Chat/Chat';
 import style from './Chats.module.css'
 import FriendsList from '../../components/Chats/FriendsList/FriendsList';
-import { connect } from 'react-redux';
-import { updateMessageText, addMessage } from '../../redux/reducers/chat-reducer';
-import { StoreStateType } from '../../redux/redux-store';
-import { FriendType, MessageType } from '../../types/type';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreators } from '../../redux/reducers/chat-reducer';
+import { getFriends, getMessages, getNewMessageText } from '../../selectors';
 
-type MapStateToPropsType = {
-  friends: Array<FriendType>,
-  messages: Array<MessageType>,
-  newMessageText: string
-}
-
-type MapDispatchToPropsType = {
-  updateMessageText: (text: string) => void
-  addMessage: () => void
-}
-
-type PropsType = MapStateToPropsType & MapDispatchToPropsType
-
-const Chats: React.FC<PropsType> = (props) => {
+const Chats = () => {
+  const friends = useSelector(getFriends)
+  const messages = useSelector(getMessages)
+  const newMessageText = useSelector(getNewMessageText)
+  const dispatch = useDispatch()
   return (
     <div className={style.chats_wrapper}>
-      <FriendsList friends={props.friends} />
+      <FriendsList friends={friends} />
       <Chat
-        messages={props.messages}
-        newMessageText={props.newMessageText}
-        updateMessageText={props.updateMessageText}
-        addMessage={props.addMessage}
+        messages={messages}
+        newMessageText={newMessageText}
+        updateMessageText={(text) => dispatch(actionCreators.updateMessageText(text))}
+        addMessage={() => dispatch(actionCreators.addMessage())}
       />
     </div>
   )
 }
 
-const mapStateToProps = (state: StoreStateType) => {
-  return {
-    friends: state.messagePage.friends,
-    messages: state.messagePage.messages,
-    newMessageText: state.messagePage.newMessageText
-  }
-}
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     updateMessageText: (text) => {
-//       dispatch(updateMessageTextActionCreator(text))
-//     },
-//     addMessage: () => {
-//       dispatch(addMessageActionCreator())
-//     }
-//   }
-// }
-
-export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, StoreStateType>(mapStateToProps, { updateMessageText, addMessage })(Chats);
+export default Chats

@@ -1,37 +1,28 @@
 import { useEffect } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import User from "../../components/Users/User";
 import Paginate from "../../components/Paginate";
-import { toggleFollowUnfollow, setCurrentPage, getUsers } from "../../redux/reducers/users-reducer";
-import { UserType } from "../../types/type";
-import { StoreStateType } from "../../redux/redux-store";
+import { actionCreators, fetchUsers } from "../../redux/reducers/users-reducer";
+import { getCurrentPage, getTotalPages, getUsers } from "../../selectors";
 
-type MapStateToPropsType = {
-  users: Array<UserType>,
-  currentPage: number,
-  totalPages: number | null
-}
 
-type MapDispatchToPropsType = {
-  toggleFollowUnfollow: (userId: number) => void,
-  setCurrentPage: (page: number) => void
-  getUsers: (page: number) => void
-}
+const Users = () => {
+  const users = useSelector(getUsers)
+  const currentPage = useSelector(getCurrentPage)
+  const totalPages = useSelector(getTotalPages)
+  const dispatch = useDispatch()
 
-type PropsType = MapStateToPropsType & MapDispatchToPropsType
-
-const Users: React.FC<PropsType> = (props) => {
   useEffect(() => {
-    props.getUsers(props.currentPage)
-  }, [props.currentPage])
+    dispatch(fetchUsers(currentPage))
+  }, [currentPage])
 
   return (
     <div>
       {
-        props.users.map(u => (
+        users.map(u => (
           <User
             user={u}
-            toggleFollowUnfollow={props.toggleFollowUnfollow}
+            toggleFollowUnfollow={dispatch(actionCreators.toggleFollowUnfollow)}
             key={u.id}
           />
         ))
@@ -39,30 +30,16 @@ const Users: React.FC<PropsType> = (props) => {
       
       <Paginate
         pageRangeDisplayed={3}
-        pageCount={props.totalPages}
-        setCurrentPage={props.setCurrentPage}
+        pageCount={totalPages}
+        setCurrentPage={(page) => dispatch(actionCreators.setCurrentPage(page))}
       />
     </div>
   )
 }
 
-const mapStateToProps = (state: StoreStateType) => (
-  {
-    users: state.usersPage.users,
-    currentPage: state.usersPage.currentPage,
-    totalPages: state.usersPage.totalPages
-  }
-)
+export default Users
 
-// const mapDispatchToProps = dispatch => (
-//   {
-//     setUsers: (users) => {
-//       dispatch(setUsersAC(users))
-//     },
-//     toggleFollowUnfollow: (userId) => {
-//       dispatch(toggleFollowUnfollowAC(userId))
-//     }
-//   }
-// )
 
-export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, StoreStateType>(mapStateToProps, { toggleFollowUnfollow, setCurrentPage, getUsers })(Users)
+// !!! OLD CODE !!!
+//
+// export default connect<MapStateToPropsType, MapDispatchToPropsType, {}, StoreStateType>(mapStateToProps, { toggleFollowUnfollow, setCurrentPage, getUsers })(Users)
